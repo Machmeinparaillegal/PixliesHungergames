@@ -4,9 +4,14 @@ main: org.pixlies.pixlieshungergames.PixliesHungergames
 api-version: 1.19
 authors: [Machmeinparaillegal]
 commands:
-  setspawn:
+  setspawnpoints:
       description: Set possible spawnpoints for when the games start!
+  start:
+      description: Start Hunger Games!
 permissions:
   pixlies.staff.hungergames.setspawnpoints:
     description: Allows user to set spawnpoints for Hungergames
     default: op
+    pixlies.staff.hungergames.start:
+      description: Allows user to start a game of Hungergames
+      default: op

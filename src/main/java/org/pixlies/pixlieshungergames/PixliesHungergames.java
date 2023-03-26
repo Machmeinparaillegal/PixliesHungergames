@@ -4,6 +4,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.pixlies.pixlieshungergames.commands.SetspawnCommand;
+import org.pixlies.pixlieshungergames.commands.StartCommand;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,6 +13,7 @@ public final class PixliesHungergames extends JavaPlugin {
 
     public static PixliesHungergames instance = null;
     public static String prefix = "§bHungergames | ";
+    public static boolean gameOngoing = false;
 
     @Override
     public void onEnable() {
@@ -53,8 +55,9 @@ public final class PixliesHungergames extends JavaPlugin {
 
 
     public void registerCommands(){
-        getCommand("setspawn").setExecutor(new SetspawnCommand());
+        getCommand("setspawnpoints").setExecutor(new SetspawnCommand());
+        getCommand("start").setExecutor(new StartCommand());
     }
 
-    }
+}
 
