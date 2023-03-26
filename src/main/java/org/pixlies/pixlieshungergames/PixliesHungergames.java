@@ -3,6 +3,7 @@ package org.pixlies.pixlieshungergames;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.pixlies.pixlieshungergames.Objects.Game;
 import org.pixlies.pixlieshungergames.commands.SetspawnCommand;
 import org.pixlies.pixlieshungergames.commands.StartCommand;
 
@@ -13,7 +14,7 @@ public final class PixliesHungergames extends JavaPlugin {
 
     public static PixliesHungergames instance = null;
     public static String prefix = "§bHungergames | ";
-    public static boolean gameOngoing = false;
+    public Game game;
 
     @Override
     public void onEnable() {
