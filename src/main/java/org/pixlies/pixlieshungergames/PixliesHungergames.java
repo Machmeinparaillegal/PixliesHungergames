@@ -6,9 +6,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.pixlies.pixlieshungergames.Objects.Game;
 import org.pixlies.pixlieshungergames.commands.SetspawnCommand;
 import org.pixlies.pixlieshungergames.commands.StartCommand;
+import org.pixlies.pixlieshungergames.events.onDeath;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
 
 public final class PixliesHungergames extends JavaPlugin {
 
@@ -23,13 +25,14 @@ public final class PixliesHungergames extends JavaPlugin {
         instance = this;
         loadConfig();
         registerCommands();
-        System.out.println(prefix + "Plugin loaded!");
+        registerEvents();
+        JavaPlugin.getPlugin(PixliesHungergames.class).getLogger().log(Level.FINE, "Plugin enabled!");
     }
 
     @Override
     public void onDisable() {
         // Plugin shutdown logic
-        System.out.println(prefix + "Plugin disabled!");
+        JavaPlugin.getPlugin(PixliesHungergames.class).getLogger().log(Level.SEVERE, "Plugin disabled!");
     }
 
     public void loadConfig() {
@@ -59,6 +62,8 @@ public final class PixliesHungergames extends JavaPlugin {
         getCommand("setspawnpoints").setExecutor(new SetspawnCommand());
         getCommand("start").setExecutor(new StartCommand());
     }
-
+    public void registerEvents() {
+        getServer().getPluginManager().registerEvents(new onDeath(), this);
+    }
 }
 

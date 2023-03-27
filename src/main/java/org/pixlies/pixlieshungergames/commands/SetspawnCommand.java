@@ -6,11 +6,14 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
+import org.pixlies.pixlieshungergames.PixliesHungergames;
 
 
 import java.io.File;
 import java.util.List;
+import java.util.logging.Level;
 
 
 public class SetspawnCommand implements CommandExecutor {
@@ -18,7 +21,7 @@ public class SetspawnCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if(!(commandSender instanceof Player)){
-            System.out.println("Console may not use this Command");
+            JavaPlugin.getPlugin(PixliesHungergames.class).getLogger().log(Level.SEVERE, "Console may not use this Command");
             return true;
         }
 

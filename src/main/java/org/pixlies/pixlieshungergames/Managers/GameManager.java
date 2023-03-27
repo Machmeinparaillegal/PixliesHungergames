@@ -1,7 +1,10 @@
 package org.pixlies.pixlieshungergames.Managers;
 
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
+import java.io.File;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -35,6 +38,14 @@ public class GameManager {
                     }
                     timePassed = timePassed - 1;
                     // Code to be executed when timer reaches 0
+                    File file = new File("plugins/PixliesHungergames", "config.yml");
+                    FileConfiguration config = YamlConfiguration.loadConfiguration(file);
+                    config.set("started", true);
+                    try {
+                        config.save(file);
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
                 }
             }
         }, 0, 1, TimeUnit.SECONDS);
