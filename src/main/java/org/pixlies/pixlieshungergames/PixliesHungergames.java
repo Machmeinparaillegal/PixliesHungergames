@@ -4,9 +4,11 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.pixlies.pixlieshungergames.Objects.Game;
+import org.pixlies.pixlieshungergames.commands.JoinCommand;
 import org.pixlies.pixlieshungergames.commands.SetspawnCommand;
 import org.pixlies.pixlieshungergames.commands.StartCommand;
 import org.pixlies.pixlieshungergames.events.onDeath;
+import org.pixlies.pixlieshungergames.events.onGameStart;
 
 import java.io.File;
 import java.io.IOException;
@@ -61,9 +63,11 @@ public final class PixliesHungergames extends JavaPlugin {
     public void registerCommands(){
         getCommand("setspawnpoints").setExecutor(new SetspawnCommand());
         getCommand("start").setExecutor(new StartCommand());
+        getCommand("join").setExecutor(new JoinCommand());
     }
     public void registerEvents() {
         getServer().getPluginManager().registerEvents(new onDeath(), this);
+        getServer().getPluginManager().registerEvents(new onGameStart(), this);
     }
 }
 

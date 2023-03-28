@@ -8,6 +8,8 @@ commands:
       description: Set possible spawnpoints for when the games start!
   start:
       description: Start Hunger Games!
+  join:
+      description: Join the Hunger Games!
 permissions:
   pixlies.staff.hungergames.setspawnpoints:
     description: Allows user to set spawnpoints for Hungergames
