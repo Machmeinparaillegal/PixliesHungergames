@@ -13,6 +13,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
 import org.pixlies.pixlieshungergames.utils.KillUtils;
 import org.pixlies.pixlieshungergames.utils.ParticipatorUtils;
+import org.pixlies.pixlieshungergames.utils.PlayerUtils;
 
 import java.io.File;
 import java.time.Duration;
@@ -44,7 +45,7 @@ public class onDeath implements Listener {
                 victim.getInventory().remove(item);
             }
         }
-        victim.getInventory().clear();
+        PlayerUtils.clearEntireInventory(victim);
         victim.showTitle(title);
         victim.playSound(victim.getLocation(), Sound.ENTITY_VILLAGER_DEATH, 1.0f, 1.0f);
         int placement = ParticipatorUtils.getParticipants().size();
