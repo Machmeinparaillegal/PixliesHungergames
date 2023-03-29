@@ -1,4 +1,4 @@
-package org.pixlies.pixlieshungergames.events;
+package org.pixlies.pixlieshungergames.listeners;
 
 import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -8,6 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.pixlies.pixlieshungergames.PixliesHungergames;
+import org.pixlies.pixlieshungergames.events.GameStartedEvent;
 import org.pixlies.pixlieshungergames.utils.PlayerUtils;
 import org.pixlies.pixlieshungergames.utils.ParticipatorUtils;
 

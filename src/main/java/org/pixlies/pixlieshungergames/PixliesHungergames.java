@@ -7,8 +7,8 @@ import org.pixlies.pixlieshungergames.Objects.Game;
 import org.pixlies.pixlieshungergames.commands.JoinCommand;
 import org.pixlies.pixlieshungergames.commands.SetspawnCommand;
 import org.pixlies.pixlieshungergames.commands.StartCommand;
-import org.pixlies.pixlieshungergames.events.onDeath;
-import org.pixlies.pixlieshungergames.events.onGameStart;
+import org.pixlies.pixlieshungergames.listeners.onDeath;
+import org.pixlies.pixlieshungergames.listeners.onGameStart;
 
 import java.io.File;
 import java.io.IOException;

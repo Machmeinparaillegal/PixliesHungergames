@@ -1,4 +1,4 @@
-package org.pixlies.pixlieshungergames.events;
+package org.pixlies.pixlieshungergames.listeners;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.title.Title;
