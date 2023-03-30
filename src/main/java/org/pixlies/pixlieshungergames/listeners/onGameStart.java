@@ -14,13 +14,14 @@ import org.pixlies.pixlieshungergames.utils.ParticipatorUtils;
 
 import java.io.File;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.logging.Level;
 
 public class onGameStart implements Listener {
     File file = new File("plugins/PixliesHungergames", "config.yml");
     FileConfiguration config = YamlConfiguration.loadConfiguration(file);
     @EventHandler
     public void startEvent(GameStartedEvent e){
-        JavaPlugin.getPlugin(PixliesHungergames.class).getLogger().info("Starting Hunger Games");
+        JavaPlugin.getPlugin(PixliesHungergames.class).getLogger().log(Level.SEVERE, "Starting Hunger Games");
         if(ParticipatorUtils.getParticipants().isEmpty()){
             PlayerUtils.messageToAll(config.getString("prefix") + "§cNo one joined :(((");
             return;

@@ -5,17 +5,12 @@ import org.bukkit.Sound;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.pixlies.pixlieshungergames.PixliesHungergames;
 import org.pixlies.pixlieshungergames.events.GameStartedEvent;
 import org.pixlies.pixlieshungergames.utils.PlayerUtils;
 
 import java.io.File;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
 import static org.pixlies.pixlieshungergames.PixliesHungergames.instance;
@@ -27,10 +22,7 @@ public class GameManager {
 
     public void startCooldown() {
         timePassed = 12;
-        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-        ScheduledFuture<?> future = executor.scheduleAtFixedRate(new Runnable() {
-            @Override
-            public void run() {
+       Bukkit.getScheduler().runTaskTimer(JavaPlugin.getPlugin(PixliesHungergames.class), bukkitTask -> {
                 if (timePassed >= 10 ) {
                     if(timePassed % 10 == 0) {
                         sendTimerMessageToAllPlayers(timePassed);
@@ -49,21 +41,13 @@ public class GameManager {
                     // Code to be executed when timer reaches 0
                     PlayerUtils.soundToAll(Sound.BLOCK_NOTE_BLOCK_PLING);
                     PlayerUtils.messageToAll(config.getString("prefix") + "§aThe Hunger Games have started! Good luck!");
-                    HandlerList list = GameStartedEvent.getHandlerList();
-                    JavaPlugin.getPlugin(PixliesHungergames.class).getLogger().log(Level.SEVERE, list.toString());
-                    Bukkit.getPluginManager().callEvent(new GameStartedEvent());
-                    JavaPlugin.getPlugin(PixliesHungergames.class).getLogger().log(Level.SEVERE, "test"); //doesnt print
+                    JavaPlugin.getPlugin(PixliesHungergames.class).getServer().getPluginManager().callEvent(new GameStartedEvent());
+                    JavaPlugin.getPlugin(PixliesHungergames.class).getLogger().log(Level.SEVERE, "Calling event");
+                    bukkitTask.cancel();
                 }
-            }
-        }, 0, 1, TimeUnit.SECONDS);
 
-        executor.schedule(new Runnable() {
-            @Override
-            public void run() {
-                // Cancel the first task after 57 seconds
-                future.cancel(true);
-            }
-        }, 59, TimeUnit.SECONDS);
+        }, 0, 20);
+
     }
 
     private void sendTimerMessageToAllPlayers(int time) {
