@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.pixlies.pixlieshungergames.PixliesHungergames;
 import org.pixlies.pixlieshungergames.events.GameStartedEvent;
+import org.pixlies.pixlieshungergames.utils.GameUtils;
 import org.pixlies.pixlieshungergames.utils.PlayerUtils;
 
 import java.io.File;
@@ -22,6 +23,7 @@ public class GameManager {
 
     public void startCooldown() {
         timePassed = 12;
+        GameUtils.setInitiated(true);
        Bukkit.getScheduler().runTaskTimer(JavaPlugin.getPlugin(PixliesHungergames.class), bukkitTask -> {
                 if (timePassed >= 10 ) {
                     if(timePassed % 10 == 0) {

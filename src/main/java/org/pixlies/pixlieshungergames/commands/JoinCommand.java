@@ -26,6 +26,10 @@ public class JoinCommand implements CommandExecutor {
         Player p = (Player) commandSender;
         File file = new File("plugins/PixliesHungergames", "config.yml");
         FileConfiguration config = YamlConfiguration.loadConfiguration(file);
+        if(!GameUtils.getInitiated()){
+            p.sendMessage(config.getString("prefix") + "§cThere is no game going on!");
+            return true;
+        }
         if(GameUtils.isStarted() || GameUtils.isPreStart()){
             p.sendMessage(config.getString("prefix") + "§cThe game has already started! Come earlier next time!");
             return true;

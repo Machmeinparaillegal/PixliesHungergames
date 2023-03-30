@@ -10,6 +10,8 @@ commands:
       description: Start Hunger Games!
   join:
       description: Join the Hunger Games!
+  gamestop:
+    description: Stop the Hunger Games!
 permissions:
   pixlies.staff.hungergames.setspawnpoints:
     description: Allows user to set spawnpoints for Hungergames

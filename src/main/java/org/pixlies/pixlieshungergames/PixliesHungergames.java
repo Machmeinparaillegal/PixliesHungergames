@@ -7,6 +7,7 @@ import org.pixlies.pixlieshungergames.Objects.Game;
 import org.pixlies.pixlieshungergames.commands.JoinCommand;
 import org.pixlies.pixlieshungergames.commands.SetspawnCommand;
 import org.pixlies.pixlieshungergames.commands.StartCommand;
+import org.pixlies.pixlieshungergames.commands.StopCommand;
 import org.pixlies.pixlieshungergames.listeners.*;
 
 import java.io.File;
@@ -62,6 +63,7 @@ public final class PixliesHungergames extends JavaPlugin {
         getCommand("setspawnpoints").setExecutor(new SetspawnCommand());
         getCommand("start").setExecutor(new StartCommand());
         getCommand("join").setExecutor(new JoinCommand());
+        getCommand("gamestop").setExecutor(new StopCommand());
     }
     public void registerEvents() {
         getServer().getPluginManager().registerEvents(new onDeath(), this);

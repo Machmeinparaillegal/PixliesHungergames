@@ -25,6 +25,7 @@ public class onGameStart implements Listener {
         JavaPlugin.getPlugin(PixliesHungergames.class).getLogger().log(Level.SEVERE, "Starting Hunger Games");
         if(ParticipatorUtils.getParticipants().isEmpty()){
             PlayerUtils.messageToAll(config.getString("prefix") + "§cNo one joined :(((");
+            GameUtils.setInitiated(false);
             return;
         }
         GameUtils.setPreStart(true);
@@ -32,6 +33,7 @@ public class onGameStart implements Listener {
         if(vacantspawns < 0){
             e.setCancelled(true);
                 PlayerUtils.messageToAll(config.getString("prefix") + "§cThere is not enough spawnpoints for the game to start! Please set §b" + Math.abs(vacantspawns) + " §cadditional spawns!");
+                GameUtils.setInitiated(false);
             return;
         }
 
@@ -60,7 +62,7 @@ public class onGameStart implements Listener {
                 GameUtils.setStarted(true);
                 GameUtils.setPreStart(false);
 
-                getSpawnWorld().setGameRule(GameRule.MOB_GRIEFING, true);
+                GameUtils.getSpawnWorld().setGameRule(GameRule.MOB_GRIEFING, true);
                 task.cancel();
             }
             timer.set(timer.get() - 1);
@@ -70,10 +72,5 @@ public class onGameStart implements Listener {
          String spawn = (String) config.getList("spawnpoints").get(i);
          String[] spawndeserialized = spawn.split(";");
         return new Location(Bukkit.getWorld(spawndeserialized[0]), Integer.parseInt(spawndeserialized[1]), Integer.parseInt(spawndeserialized[2]), Integer.parseInt(spawndeserialized[3]));
-    }
-    public World getSpawnWorld(){
-        String spawns = (String) config.getList("spawnpoints").get(0);
-        String[] spawnsdeserialized = spawns.split(";");
-        return Bukkit.getWorld(spawnsdeserialized[0]);
     }
 }

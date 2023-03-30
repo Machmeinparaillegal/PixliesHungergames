@@ -28,7 +28,7 @@ public class SetspawnCommand implements CommandExecutor {
         Player p = (Player)commandSender;
 
         if(!p.hasPermission("pixlies.staff.hungergames.spawnpoint")){
-            p.sendMessage("§cYou may not use this Command!");
+            p.sendMessage("§cYou do not have permission to do this!");
             return true;
         }
         String world = p.getWorld().getName();

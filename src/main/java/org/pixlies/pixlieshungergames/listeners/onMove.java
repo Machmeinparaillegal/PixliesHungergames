@@ -9,7 +9,7 @@ import org.pixlies.pixlieshungergames.utils.ParticipatorUtils;
 public class onMove implements Listener {
     @EventHandler
     public void moveEvent(PlayerMoveEvent e){
-        if(GameUtils.isPreStart() && ParticipatorUtils.getParticipants().contains(e.getPlayer().getName()) && e.hasChangedPosition()){
+        if(GameUtils.isPreStart() && ParticipatorUtils.getParticipants().contains(e.getPlayer().getName()) && e.hasChangedBlock()){
             e.setCancelled(true);
         }
     }
