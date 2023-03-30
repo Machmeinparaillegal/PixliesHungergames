@@ -11,6 +11,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
+import org.pixlies.pixlieshungergames.utils.GameUtils;
 import org.pixlies.pixlieshungergames.utils.KillUtils;
 import org.pixlies.pixlieshungergames.utils.ParticipatorUtils;
 import org.pixlies.pixlieshungergames.utils.PlayerUtils;
@@ -25,7 +26,7 @@ public class onDeath implements Listener {
         File file = new File("plugins/PixliesHungergames", "config.yml");
         FileConfiguration config = YamlConfiguration.loadConfiguration(file);
         //TODO: disabled for testing purposes
-        //if(!config.getBoolean("started") || !ParticipatorUtils.getParticipants().contains(e.getPlayer().getName())) return;
+        //if(!GameUtils.isStarted() || !ParticipatorUtils.getParticipants().contains(e.getPlayer().getName())) return;
 
         e.setCancelled(true);
         Player victim = e.getPlayer();

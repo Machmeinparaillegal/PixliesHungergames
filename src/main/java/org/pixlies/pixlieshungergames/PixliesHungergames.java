@@ -48,7 +48,6 @@ public final class PixliesHungergames extends JavaPlugin {
             }
         }
             FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
-            cfg.set("started", false);
             cfg.set("prefix", prefix);
             try {
                 cfg.save(file);

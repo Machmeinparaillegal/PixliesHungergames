@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.pixlies.pixlieshungergames.PixliesHungergames;
+import org.pixlies.pixlieshungergames.utils.GameUtils;
 import org.pixlies.pixlieshungergames.utils.ParticipatorUtils;
 
 
@@ -25,7 +26,7 @@ public class JoinCommand implements CommandExecutor {
         Player p = (Player) commandSender;
         File file = new File("plugins/PixliesHungergames", "config.yml");
         FileConfiguration config = YamlConfiguration.loadConfiguration(file);
-        if(config.getBoolean("started")){
+        if(GameUtils.isStarted() || GameUtils.isPreStart()){
             p.sendMessage(config.getString("prefix") + "§cThe game has already started! Come earlier next time!");
             return true;
         }

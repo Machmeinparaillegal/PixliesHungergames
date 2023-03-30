@@ -1,5 +1,6 @@
 package org.pixlies.pixlieshungergames.utils;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -7,9 +8,7 @@ import org.bukkit.inventory.PlayerInventory;
 
 public class PlayerUtils {
     public static void messageToAll(String message){
-        for(Player p : Bukkit.getOnlinePlayers()){
-            p.sendMessage(message);
-        }
+        Bukkit.broadcast(Component.text(message));
     }
     public static void soundToAll(Sound sound){
         for(Player p : Bukkit.getOnlinePlayers()){
