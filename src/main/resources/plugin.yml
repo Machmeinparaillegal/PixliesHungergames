@@ -14,6 +14,9 @@ permissions:
   pixlies.staff.hungergames.setspawnpoints:
     description: Allows user to set spawnpoints for Hungergames
     default: op
-    pixlies.staff.hungergames.start:
-      description: Allows user to start a game of Hungergames
-      default: op
+  pixlies.staff.hungergames.start:
+    description: Allows user to start a game of Hungergames
+    default: op
+  pixlies.staff.hungergames.bypass:
+    description: Allows user to bypass certain restrictions
+    default: op

@@ -7,8 +7,7 @@ import org.pixlies.pixlieshungergames.Objects.Game;
 import org.pixlies.pixlieshungergames.commands.JoinCommand;
 import org.pixlies.pixlieshungergames.commands.SetspawnCommand;
 import org.pixlies.pixlieshungergames.commands.StartCommand;
-import org.pixlies.pixlieshungergames.listeners.onDeath;
-import org.pixlies.pixlieshungergames.listeners.onGameStart;
+import org.pixlies.pixlieshungergames.listeners.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -67,6 +66,10 @@ public final class PixliesHungergames extends JavaPlugin {
     public void registerEvents() {
         getServer().getPluginManager().registerEvents(new onDeath(), this);
         getServer().getPluginManager().registerEvents(new onGameStart(), this);
+        getServer().getPluginManager().registerEvents(new onMove(), this);
+        getServer().getPluginManager().registerEvents(new onBlockBreak(), this);
+        getServer().getPluginManager().registerEvents(new onPlayerHit(), this);
+        getServer().getPluginManager().registerEvents(new onInteract(), this);
     }
 }
 
