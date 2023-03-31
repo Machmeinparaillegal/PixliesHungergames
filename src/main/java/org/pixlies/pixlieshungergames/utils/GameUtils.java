@@ -1,20 +1,24 @@
 package org.pixlies.pixlieshungergames.utils;
 
-import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
-import org.bukkit.GameRule;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.pixlies.pixlieshungergames.PixliesHungergames;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public class GameUtils {
 
     private static boolean initiated = false;
     private static boolean preStart = false;
     private static boolean started = false;
+    private static ArrayList<String> trackerCooldown = new ArrayList<>();
     public static void setPreStart(boolean ps) {
         preStart = ps;
     }
@@ -59,5 +63,26 @@ public class GameUtils {
             p.getActivePotionEffects().clear();
         }
         getSpawnWorld().setGameRule(GameRule.MOB_GRIEFING, false);
+    }
+
+    public static ItemStack createTracker(){
+        NamespacedKey key = new NamespacedKey(JavaPlugin.getPlugin(PixliesHungergames.class), "tracker");
+        ItemStack stack = new ItemStack(Material.COMPASS);
+        ItemMeta meta = stack.getItemMeta();
+        meta.getPersistentDataContainer().set(key, PersistentDataType.STRING, "tracker");
+        stack.setItemMeta(meta);
+        return stack;
+    }
+
+    public static boolean getTrackerCooldown(String p){
+        return trackerCooldown.contains(p);
+    }
+
+    public static void setTrackerCooldown(String p){
+        if(!trackerCooldown.contains(p)){
+            trackerCooldown.add(p);
+        }else{
+            trackerCooldown.remove(p);
+        }
     }
 }

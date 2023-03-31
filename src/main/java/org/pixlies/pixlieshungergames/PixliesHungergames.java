@@ -62,6 +62,7 @@ public final class PixliesHungergames extends JavaPlugin {
         getCommand("join").setExecutor(new JoinCommand());
         getCommand("gamestop").setExecutor(new StopCommand());
         getCommand("setendingspawn").setExecutor(new setEndingSpawn());
+        getCommand("tracker").setExecutor(new trackerCommand());
     }
     public void registerEvents() {
         getServer().getPluginManager().registerEvents(new onDeath(), this);

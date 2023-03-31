@@ -37,13 +37,13 @@ public class onDeath implements Listener {
         Player victim = e.getPlayer();
         Player killer = e.getPlayer().getKiller();
 
-
-        String deathmessage = e.getDeathMessage().replace(victim.getName(), "You") + "!";
-        if(deathmessage.contains("was")){
-            deathmessage = deathmessage.replace("was", "were");
+        String deathMessage = e.getDeathMessage();
+        String privateDeathMessage = deathMessage.replace(victim.getName(), "You") + "!";
+        if(privateDeathMessage.contains("was")){
+            privateDeathMessage = privateDeathMessage.replace("was", "were");
         }
 
-        Title title = Title.title(Component.text("§4YOU DIED!"), Component.text(deathmessage), Title.Times.times(Duration.ofSeconds(1), Duration.ofSeconds(3), Duration.ofSeconds(2)));
+        Title title = Title.title(Component.text("§4YOU DIED!"), Component.text(privateDeathMessage), Title.Times.times(Duration.ofSeconds(1), Duration.ofSeconds(3), Duration.ofSeconds(2)));
         victim.setGameMode(GameMode.SPECTATOR);
         for(ItemStack item : victim.getInventory().getContents()) {
             if(item != null) {
@@ -57,7 +57,8 @@ public class onDeath implements Listener {
         int placement = ParticipatorUtils.getParticipants().size();
         victim.sendMessage("§aYou placed §c" + placement + getEnding(placement) + " §awith §c" + KillUtils.getKills(victim.getName()) + " §akills! \nBetter luck next time!");
         ParticipatorUtils.removeParticipant(victim.getName());
-
+        String publicDeathMessage = config.getString("prefix") + "§f"+ deathMessage +"! §c" + ParticipatorUtils.getParticipants().size()+ " §f contestants remain!";
+        PlayerUtils.messageToAll(publicDeathMessage);
         //TODO: Test
         if(killer != null) {
 
@@ -67,7 +68,16 @@ public class onDeath implements Listener {
             killer.playSound(killer.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f);
             KillUtils.addKill(killer.getName());
         }
+        //Number determines when players get their tracker compass
+        if(placement == 6){
+            for(String partplayer : ParticipatorUtils.getParticipants()){
+                Player recipient = Bukkit.getPlayer(partplayer);
+                if(recipient == null) continue;
+                recipient.getInventory().addItem(GameUtils.createTracker());
+            }
+        }
         if(placement == 2) {
+            //What happens when there is only one player left
             GameUtils.stopGame();
             Player firstPlace = Bukkit.getPlayer(ParticipatorUtils.getParticipants().get(0));
             assert firstPlace != null;

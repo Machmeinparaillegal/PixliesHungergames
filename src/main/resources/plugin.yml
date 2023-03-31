@@ -6,14 +6,21 @@ authors: [Machmeinparaillegal]
 commands:
   setspawnpoints:
       description: Set possible spawnpoints for when the games start!
+      permission: pixlies.staff.hungergames.setspawnpoints
   start:
       description: Start Hunger Games!
+      permission: pixlies.staff.hungergames.start
   join:
       description: Join the Hunger Games!
   gamestop:
     description: Stop the Hunger Games!
+    permission: pixlies.staff.hungergames.start
   setendingspawn:
     description: Set spawns for after the game ends!
+    permission: pixlies.staff.hungergames.setspawnpoints
+  tracker:
+    description: Gives everyone a tracker compass!
+    permission: pixlies.staff.hungergames.start
 permissions:
   pixlies.staff.hungergames.setspawnpoints:
     description: Allows user to set spawnpoints for Hungergames
