@@ -29,4 +29,7 @@ public class ParticipatorUtils {
         }
         participants.remove(player);
     }
+    public static ArrayList<String> getLeaders(){
+        return leaders;
+    }
 }

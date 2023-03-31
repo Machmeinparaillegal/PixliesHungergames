@@ -1,11 +1,11 @@
 package org.pixlies.pixlieshungergames.utils;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.NavigableMap;
+import java.util.TreeMap;
 
 public class KillUtils {
     //TODO: Test
-    static Map<String, Integer> killmap = new HashMap<>();
+    static TreeMap<String, Integer> killmap = new TreeMap<>();
 
     public static void addKill(String playerName){
         if(!killmap.containsKey(playerName)) {
@@ -19,5 +19,9 @@ public class KillUtils {
     public static Integer getKills(String playerName){
         if(!killmap.containsKey(playerName)) return 0;
         return killmap.get(playerName);
+    }
+
+    public static NavigableMap<String, Integer> getKillMap(){
+        return killmap.descendingMap();
     }
 }

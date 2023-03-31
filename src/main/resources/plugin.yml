@@ -12,6 +12,8 @@ commands:
       description: Join the Hunger Games!
   gamestop:
     description: Stop the Hunger Games!
+  setendingspawn:
+    description: Set spawns for after the game ends!
 permissions:
   pixlies.staff.hungergames.setspawnpoints:
     description: Allows user to set spawnpoints for Hungergames
