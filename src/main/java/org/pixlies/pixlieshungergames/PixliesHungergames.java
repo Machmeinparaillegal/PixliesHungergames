@@ -70,6 +70,7 @@ public final class PixliesHungergames extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new onBlockBreak(), this);
         getServer().getPluginManager().registerEvents(new onPlayerHit(), this);
         getServer().getPluginManager().registerEvents(new onInteract(), this);
+        getServer().getPluginManager().registerEvents(new onLeave(), this);
     }
 }
 

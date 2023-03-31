@@ -46,6 +46,9 @@ public class onGameStart implements Listener {
             }
             partplayer.teleport(getSpawn(place));
             place++;
+            partplayer.setGameMode(GameMode.SURVIVAL);
+            partplayer.setHealth(20);
+            partplayer.setFoodLevel(20);
         }
         AtomicInteger timer = new AtomicInteger(10);
         Bukkit.getScheduler().runTaskTimer(JavaPlugin.getPlugin(PixliesHungergames.class), task -> {
