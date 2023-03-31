@@ -1,6 +1,8 @@
 package org.pixlies.pixlieshungergames.utils;
 
 import org.bukkit.*;
+import org.bukkit.block.BlockState;
+import org.bukkit.block.Chest;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -12,6 +14,8 @@ import org.pixlies.pixlieshungergames.PixliesHungergames;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.logging.Level;
 
 public class GameUtils {
 
@@ -83,6 +87,43 @@ public class GameUtils {
             trackerCooldown.add(p);
         }else{
             trackerCooldown.remove(p);
+        }
+    }
+
+    public static void fillChests(){
+        JavaPlugin.getPlugin(PixliesHungergames.class).getLogger().log(Level.INFO, "Filling chests");
+        World world = getSpawnWorld();
+        ArrayList<ItemStack> items = new ArrayList<>();
+        items.add(new ItemStack(Material.WOODEN_SWORD));
+        items.add(new ItemStack(Material.STONE_AXE));
+        items.add(new ItemStack(Material.COOKED_BEEF, 2));
+        items.add(new ItemStack(Material.STICK, 2));
+        items.add(new ItemStack(Material.ROTTEN_FLESH, 3));
+        items.add(new ItemStack(Material.LEATHER_CHESTPLATE));
+        for(Chunk chunk : world.getLoadedChunks()){
+            for(BlockState ent : chunk.getTileEntities()){
+                ArrayList<ItemStack> openItems = new ArrayList<>(items);
+                if(ent instanceof Chest){
+                    Chest chest = (Chest) ent;
+                    chest.getBlockInventory().clear();
+                    int i = 0;
+                    ArrayList<Integer> slots = new ArrayList<>();
+                    int s = 1;
+                    while(s <= chest.getBlockInventory().getSize()){
+                        slots.add(s);
+                        s++;
+                    }
+
+                    int amountItems = ThreadLocalRandom.current().nextInt(2, 5);
+                    while(i < amountItems){
+                        //Puts 2-4 items in the chest
+                        int randomItem = ThreadLocalRandom.current().nextInt(0, openItems.size());
+                        chest.getBlockInventory().setItem( slots.get(ThreadLocalRandom.current().nextInt(0, slots.size()-1)) ,openItems.get(randomItem));
+                        openItems.remove(randomItem);
+                        i++;
+                    }
+                }
+            }
         }
     }
 }

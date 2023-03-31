@@ -50,6 +50,7 @@ public class onGameStart implements Listener {
             partplayer.setHealth(20);
             partplayer.setFoodLevel(20);
         }
+        GameUtils.fillChests();
         AtomicInteger timer = new AtomicInteger(10);
         Bukkit.getScheduler().runTaskTimer(JavaPlugin.getPlugin(PixliesHungergames.class), task -> {
             if(timer.get() == 10){

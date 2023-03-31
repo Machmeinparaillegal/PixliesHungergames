@@ -57,7 +57,7 @@ public class onDeath implements Listener {
         int placement = ParticipatorUtils.getParticipants().size();
         victim.sendMessage("§aYou placed §c" + placement + getEnding(placement) + " §awith §c" + KillUtils.getKills(victim.getName()) + " §akills! \nBetter luck next time!");
         ParticipatorUtils.removeParticipant(victim.getName());
-        String publicDeathMessage = config.getString("prefix") + "§f"+ deathMessage +"! §c" + ParticipatorUtils.getParticipants().size()+ " §f contestants remain!";
+        String publicDeathMessage = config.getString("prefix") + "§f"+ deathMessage +"! §c" + ParticipatorUtils.getParticipants().size()+ " §fcontestants remain!";
         PlayerUtils.messageToAll(publicDeathMessage);
         //TODO: Test
         if(killer != null) {
