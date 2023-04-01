@@ -24,4 +24,8 @@ public class KillUtils {
     public static NavigableMap<String, Integer> getKillMap(){
         return killmap.descendingMap();
     }
+
+    public static void clear(){
+        killmap.clear();
+    }
 }

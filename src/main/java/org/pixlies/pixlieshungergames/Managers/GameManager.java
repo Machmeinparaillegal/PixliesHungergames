@@ -22,6 +22,7 @@ public class GameManager {
     FileConfiguration config = YamlConfiguration.loadConfiguration(file);
 
     public void startCooldown() {
+        //TODO: Increase Countdown
         timePassed = 12;
         GameUtils.setInitiated(true);
        Bukkit.getScheduler().runTaskTimer(JavaPlugin.getPlugin(PixliesHungergames.class), bukkitTask -> {
@@ -44,7 +45,7 @@ public class GameManager {
                     PlayerUtils.soundToAll(Sound.BLOCK_NOTE_BLOCK_PLING);
                     PlayerUtils.messageToAll(config.getString("prefix") + "§aThe Hunger Games have started! Good luck!");
                     JavaPlugin.getPlugin(PixliesHungergames.class).getServer().getPluginManager().callEvent(new GameStartedEvent());
-                    JavaPlugin.getPlugin(PixliesHungergames.class).getLogger().log(Level.SEVERE, "Calling event");
+                    JavaPlugin.getPlugin(PixliesHungergames.class).getLogger().log(Level.INFO, "Calling event");
                     bukkitTask.cancel();
                 }
 

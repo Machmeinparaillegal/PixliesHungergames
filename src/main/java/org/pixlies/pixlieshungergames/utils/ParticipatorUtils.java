@@ -13,23 +13,36 @@ public class ParticipatorUtils {
     }
     public static void removeParticipant(String player){
         //Save the top 5 (except first place) for later
-        switch (participants.size()){
-            case 1:
-                leaders.add(0, player);
-                break;
-            case 2:
-                leaders.add(1, player);
-                break;
-            case 3:
-                leaders.add(2, player);
-                break;
-            case 4:
-                leaders.add(3, player);
-                break;
+        if(GameUtils.isStarted()) {
+            if(leaders.isEmpty()){
+                leaders.add(0, "No one :(");
+                leaders.add(1, "No one :(");
+                leaders.add(2, "No one :(");
+                leaders.add(3, "No one :(");
+            }
+            switch (participants.size()) {
+                case 2:
+                    leaders.set(0, player);
+                    break;
+                case 3:
+                    leaders.set(1, player);
+                    break;
+                case 4:
+                    leaders.set(2, player);
+                    break;
+                case 5:
+                    leaders.set(3, player);
+                    break;
+            }
         }
         participants.remove(player);
     }
     public static ArrayList<String> getLeaders(){
         return leaders;
+    }
+
+    public static void clear(){
+        participants.clear();
+        leaders.clear();
     }
 }

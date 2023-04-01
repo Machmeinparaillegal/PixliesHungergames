@@ -29,12 +29,12 @@ public class setEndingSpawn implements CommandExecutor {
         FileConfiguration config = YamlConfiguration.loadConfiguration(file);
 
         String world = p.getWorld().getName();
-        long x = Math.round(p.getLocation().getX() * 100) / 100;
-        long y = Math.round(p.getLocation().getY() * 100) / 100;
-        long z = Math.round(p.getLocation().getZ() * 100) / 100;
-        float pitch = p.getLocation().getPitch();
+        double x = (double) Math.round(p.getLocation().getX() * 100) / 100;
+        double y = (double) Math.round(p.getLocation().getY() * 100) / 100;
+        double z = (double) Math.round(p.getLocation().getZ() * 100) / 100;
         float yaw = p.getLocation().getYaw();
-        String serialized = world + ";" + x + ";" + y + ";" + z + ";" + pitch + ";" + yaw;
+        float pitch = p.getLocation().getPitch();
+        String serialized = world + ";" + x + ";" + y + ";" + z + ";" + yaw + ";" + pitch;
 
         if(args.length == 0){
             config.set("endingmain", serialized);

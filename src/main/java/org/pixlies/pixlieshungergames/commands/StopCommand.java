@@ -23,7 +23,7 @@ public class StopCommand implements CommandExecutor {
             p.sendMessage("You do not have permission to do this!");
             return false;
         }
-        if(!GameUtils.getInitiated()){
+        if(!GameUtils.getInitiated() && !GameUtils.isPreStart() && !GameUtils.isStarted()){
             p.sendMessage("§cThere is no game in progress!");
             return false;
         }

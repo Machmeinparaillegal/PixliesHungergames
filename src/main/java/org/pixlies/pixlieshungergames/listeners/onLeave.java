@@ -24,7 +24,11 @@ public class onLeave implements Listener {
             PlayerUtils.clearEntireInventory(p);
             File file = new File("plugins/PixliesHungergames", "config.yml");
             FileConfiguration config = YamlConfiguration.loadConfiguration(file);
-            PlayerUtils.messageToAll(config.getString("prefix") + " §c" + ParticipatorUtils.getParticipants().size() + " §fcontestants remain!");
+            if(ParticipatorUtils.getParticipants().size() == 1){
+                GameUtils.gameFinished();
+            }else {
+                PlayerUtils.messageToAll(config.getString("prefix") + " §c" + ParticipatorUtils.getParticipants().size() + " §fcontestants remain!");
+            }
         }
 
     }

@@ -9,6 +9,8 @@ import org.jetbrains.annotations.NotNull;
 import org.pixlies.pixlieshungergames.Objects.Game;
 import org.pixlies.pixlieshungergames.PixliesHungergames;
 import org.pixlies.pixlieshungergames.utils.GameUtils;
+import org.pixlies.pixlieshungergames.utils.KillUtils;
+import org.pixlies.pixlieshungergames.utils.ParticipatorUtils;
 
 import java.util.logging.Level;
 
@@ -31,6 +33,8 @@ public class StartCommand implements CommandExecutor {
             return false;
         }
         player.sendMessage("§aStarting Hunger Games...");
+        KillUtils.clear();
+        ParticipatorUtils.clear();
         instance.game = new Game();
 
 
