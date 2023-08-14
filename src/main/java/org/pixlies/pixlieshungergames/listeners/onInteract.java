@@ -20,7 +20,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class onInteract implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void interactEvent(PlayerInteractEvent e){
-        if(!GameUtils.isStarted() && !e.getPlayer().hasPermission("pixlies.staff.hungergames.bypass")){
+        if((!GameUtils.isStarted() && !e.getPlayer().hasPermission("pixlies.staff.hungergames.bypass")) || (GameUtils.isPreStart() && ParticipatorUtils.getParticipants().contains(e.getPlayer().getName()))){
             e.setCancelled(true);
             return;
         }

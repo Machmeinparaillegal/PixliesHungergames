@@ -74,6 +74,7 @@ public class GameUtils {
             p.getActivePotionEffects().clear();
         }
         getSpawnWorld().setGameRule(GameRule.MOB_GRIEFING, false);
+        ParticipatorUtils.clear();
     }
 
     public static ItemStack createTracker(){
