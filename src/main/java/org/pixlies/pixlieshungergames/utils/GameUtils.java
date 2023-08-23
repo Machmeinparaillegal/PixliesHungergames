@@ -86,7 +86,7 @@ public class GameUtils {
         List<Component> lore = new ArrayList<>();
         lore.add(Component.text("§bTracks a random player"));
         lore.add(Component.text("§bClick on a block to use!"));
-        lore.add(Component.text("§cCooldown: 1 Minute"));
+        lore.add(Component.text("§cCooldown: 30 seconds"));
         meta.lore(lore);
         stack.setItemMeta(meta);
         return stack;
@@ -154,21 +154,21 @@ public class GameUtils {
         String[] endingspawn1 = config.getString("endingfirst").split(";");
         String[] endingspawn2 = config.getString("endingsecond").split(";");
         String[] endingspawn3 = config.getString("endingthird").split(";");
-        PotionEffect effect = new PotionEffect(PotionEffectType.SLOW, 20*7, 8, false, false);
         for (Player p : Bukkit.getOnlinePlayers()){
             if(p == firstPlace){
                 p.teleport(deserialize(endingspawn1));
-                p.addPotionEffect(effect);
+                PlayerUtils.addStopped(p);
             } else if (ParticipatorUtils.getLeaders().get(0).equals(p.getName())) {
                 p.teleport(deserialize(endingspawn2));
-                p.addPotionEffect(effect);
+                PlayerUtils.addStopped(p);
             }else if(ParticipatorUtils.getLeaders().get(1).equals(p.getName())){
                 p.teleport(deserialize(endingspawn3));
-                p.addPotionEffect(effect);
+                PlayerUtils.addStopped(p);
             }else{
                 p.teleport(deserialize(endingspawnall));
             }
         }
+        Bukkit.getScheduler().runTaskLater(JavaPlugin.getPlugin(PixliesHungergames.class), PlayerUtils::clearStopped, 20*5);
         Firework fw = deserialize(endingspawnall).getWorld().spawn(deserialize(endingspawnall), Firework.class);
         FireworkMeta fwm = fw.getFireworkMeta();
         fwm.setPower(4);
@@ -198,5 +198,20 @@ public class GameUtils {
 
     public static Location deserialize(String[] s){
         return new Location(Bukkit.getWorld(s[0]), Double.parseDouble(s[1]), Double.parseDouble(s[2]), Double.parseDouble(s[3]), Float.parseFloat(s[4]), Float.parseFloat(s[5]));
+    }
+
+    public static void giveTracker(){
+        File file = new File("plugins/PixliesHungergames", "config.yml");
+        FileConfiguration config = YamlConfiguration.loadConfiguration(file);
+        for(String partplayer : ParticipatorUtils.getParticipants()){
+            Player recipient = Bukkit.getPlayer(partplayer);
+            if(recipient == null) continue;
+            if(recipient.getInventory().firstEmpty() == -1){
+                recipient.getWorld().dropItemNaturally(recipient.getLocation(), GameUtils.createTracker());
+            }else {
+                recipient.getInventory().addItem(GameUtils.createTracker());
+            }
+            recipient.sendMessage(config.getString("prefix") + "§fYou recieved a §cTracker§f! Click a block to use!");
+        }
     }
 }

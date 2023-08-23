@@ -66,11 +66,7 @@ public class onDeath implements Listener {
         }
         //Number determines when players get their tracker compass
         if(placement == 6){
-            for(String partplayer : ParticipatorUtils.getParticipants()){
-                Player recipient = Bukkit.getPlayer(partplayer);
-                if(recipient == null) continue;
-                recipient.getInventory().addItem(GameUtils.createTracker());
-            }
+           GameUtils.giveTracker();
         }
         if(placement == 2) {
             //What happens when there is only one player left

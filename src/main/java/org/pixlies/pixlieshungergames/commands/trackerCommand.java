@@ -26,11 +26,7 @@ public class trackerCommand implements CommandExecutor {
                 p.sendMessage("§aGiving everyone a tracker compass...");
             }
         }
-        for(String partplayer : ParticipatorUtils.getParticipants()){
-            Player recipient = Bukkit.getPlayer(partplayer);
-            if(recipient == null) continue;
-            recipient.getInventory().addItem(GameUtils.createTracker());
-        }
+        GameUtils.giveTracker();
         return false;
     }
 }

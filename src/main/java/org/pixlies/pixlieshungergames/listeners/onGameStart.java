@@ -25,7 +25,7 @@ public class onGameStart implements Listener {
         File file = new File("plugins/PixliesHungergames", "config.yml");
         FileConfiguration config = YamlConfiguration.loadConfiguration(file);
         JavaPlugin.getPlugin(PixliesHungergames.class).getLogger().log(Level.INFO, "Starting Hunger Games");
-        if(ParticipatorUtils.getParticipants().isEmpty()){
+        if(ParticipatorUtils.getParticipants().isEmpty() || ParticipatorUtils.getParticipants().size() == 1){
             PlayerUtils.messageToAll(config.getString("prefix") + "§cNo one joined :(((");
             GameUtils.setInitiated(false);
             return;

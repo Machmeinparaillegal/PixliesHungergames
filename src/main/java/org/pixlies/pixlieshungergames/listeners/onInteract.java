@@ -48,10 +48,10 @@ public class onInteract implements Listener {
             GameUtils.setTrackerCooldown(p.getName());
             Bukkit.getScheduler().runTaskLater(JavaPlugin.getPlugin(PixliesHungergames.class), () -> {
                 GameUtils.setTrackerCooldown(p.getName());
-            }, 20*60);
+            }, 20*30);
         }
         if(p.getInventory().getItem(e.getHand()).equals(GameUtils.createTracker()) && GameUtils.getTrackerCooldown(p.getName())){
-            p.sendMessage(config.getString("prefix") + "§cYou can only refresh your tracker once a minute!");
+            p.sendMessage(config.getString("prefix") + "§cYou can only refresh your tracker once every 30 seconds!");
         }
     }
 }

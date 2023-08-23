@@ -1,5 +1,7 @@
 package org.pixlies.pixlieshungergames.commands;
 
+import net.kyori.adventure.text.Component;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -28,7 +30,7 @@ public class StopCommand implements CommandExecutor {
             return false;
         }
 
-        p.sendMessage("§aStopped the Hunger Games!");
+        Bukkit.broadcast(Component.text("§aStopped the Hunger Games!"));
         GameUtils.stopGame();
         return false;
     }
