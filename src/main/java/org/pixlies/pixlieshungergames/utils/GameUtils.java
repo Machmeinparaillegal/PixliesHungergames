@@ -143,7 +143,10 @@ public class GameUtils {
     public static void gameFinished(){
         File file = new File("plugins/PixliesHungergames", "config.yml");
         FileConfiguration config = YamlConfiguration.loadConfiguration(file);
-        GameUtils.stopGame();
+        if (ParticipatorUtils.getParticipants().isEmpty()){
+            stopGame();
+            return;
+        }
         Player firstPlace = Bukkit.getPlayer(ParticipatorUtils.getParticipants().get(0));
         assert firstPlace != null;
         firstPlace.sendMessage(config.getString("prefix") + "§aCongratulations! You won the Hunger Games!");
@@ -173,7 +176,7 @@ public class GameUtils {
         fw.setFireworkMeta(fwm);
         fw.detonate();
 
-        PlayerUtils.messageToAll("§k.     §bHunger Games - Results     §k.\n" +
+        PlayerUtils.messageToAll("§k.     §bHunger Games - Results     §f§k.\n" +
                 "§k.     §61st Place - §f" + firstPlace.getName() + " - §c" + KillUtils.getKills(firstPlace.getName()) +" §fkills" + "     §k.\n" +
                 "§k.     §62nd Place - §f" + ParticipatorUtils.getLeaders().get(0) + " - §c" + KillUtils.getKills(ParticipatorUtils.getLeaders().get(0)) +" §fkills" + "     §k.\n" +
                 "§k.     §63rd Place - §f" + ParticipatorUtils.getLeaders().get(1) + " - §c" + KillUtils.getKills(ParticipatorUtils.getLeaders().get(1)) +" §fkills" + "     §k.\n" +
@@ -183,13 +186,14 @@ public class GameUtils {
         String firstKills =  killmap.isEmpty() ? "No one :(" : killmap.firstKey();
         String secondKills = killmap.lowerKey(firstKills) == null ? "No one :(" : killmap.lowerKey(firstKills);
         String thirdKills = secondKills.equals("No one :(")|| killmap.lowerKey(secondKills) == null ? "No one :(" : killmap.lowerKey(secondKills);
-        String mostKills = killmap.get(firstKills) == null ? "None" : killmap.get(firstKills).toString();
-        String secondmostKills = secondKills.equals("No one :(") ? "None" : killmap.get(secondKills).toString();
-        String thirdmostKills = thirdKills.equals("No one :(") ? "None" : killmap.get(thirdKills).toString();
-        PlayerUtils.messageToAll("§k.     §bHunger Games - Most kills\n" +
+        String mostKills = killmap.get(firstKills) == null ? "0" : killmap.get(firstKills).toString();
+        String secondmostKills = secondKills.equals("No one :(") ? "0" : killmap.get(secondKills).toString();
+        String thirdmostKills = thirdKills.equals("No one :(") ? "0" : killmap.get(thirdKills).toString();
+        PlayerUtils.messageToAll("§k.     §bHunger Games - Most kills     §f§k.\n" +
                 "§k.     §f" + firstKills + " - §c" + mostKills + " §fkills" + "     §k.\n" +
                 "§k.     §f" + secondKills + " - §c" + secondmostKills + " §fkills" + "     §k.\n" +
                 "§k.     §f" + thirdKills + " - §c" + thirdmostKills + " §fkills" + "     §k.");
+        GameUtils.stopGame();
     }
 
     public static Location deserialize(String[] s){
