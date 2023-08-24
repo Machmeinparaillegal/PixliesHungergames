@@ -159,9 +159,11 @@ public class GameUtils {
                 p.teleport(deserialize(endingspawn1));
                 PlayerUtils.addStopped(p);
             } else if (ParticipatorUtils.getLeaders().get(0).equals(p.getName())) {
+                p.spigot().respawn();
                 p.teleport(deserialize(endingspawn2));
                 PlayerUtils.addStopped(p);
             }else if(ParticipatorUtils.getLeaders().get(1).equals(p.getName())){
+                p.spigot().respawn();
                 p.teleport(deserialize(endingspawn3));
                 PlayerUtils.addStopped(p);
             }else{
